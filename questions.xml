@@ -1,46 +1,263 @@
 <quiz>
   <question id="1">
-    <text>Ako sa nazýva proces bunkového delenia, pri ktorom vznikajú dve geneticky identické bunky?</text>
-    <option id="A">Mitóza</option>
-    <option id="B">Meióza</option>
-    <option id="C">Oogenéza</option>
-    <option id="D">Spermatogenéza</option>
-    <answer>A</answer>
+    <text>Centroméra:</text>
+    <option id="A">je presne v strede chromozómu</option>
+    <option id="B">je koncová oblasť na chromozóme</option>
+    <option id="C">je oblasť na chromozóme, kde sa pripája deliace vretienko</option>
+    <option id="D">skladá sa z centrioly a deliaceho vretienka</option>
+    <option id="E">sa po mitóze odpája od chromozómu</option>
+    <option id="F">sa po meióze odpája od chromozómu</option>
+    <option id="G">je súčasť chromozómu</option>
+    <option id="H">je súčasť deliaceho vretienka</option>
+    <answer>C,G</answer>
   </question>
 
   <question id="2">
-    <text>Aký je chemický vzorec kyseliny sírovej?</text>
-    <option id="A">H₂SO₄</option>
-    <option id="B">HNO₃</option>
-    <option id="C">H₂CO₃</option>
-    <option id="D">HCl</option>
-    <answer>A</answer>
+    <text>Ak poznáme frekvenciu dominantných homozygotov v populácii, frekvenciu dominantných alel vypočítame:</text>
+    <option id="A">p-q=1</option>
+    <option id="B">p^2=1-q</option>
+    <option id="C">2pq</option>
+    <option id="D">q=1-p</option>
+    <option id="E">p+2q=1</option>
+    <option id="F">2p2q</option>
+    <option id="G">p=√p^2</option>
+    <option id="H">q^2</option>
+    <answer>G</answer>
   </question>
 
   <question id="3">
-    <text>Čo je základnou funkčnou jednotkou obličiek?</text>
-    <option id="A">Alveola</option>
-    <option id="B">Neuron</option>
-    <option id="C">Neurón</option>
-    <option id="D">Nefrón</option>
-    <answer>D</answer>
+    <text>Autotrofné bunky môžu využívať energiu:</text>
+    <option id="A">pohybovú</option>
+    <option id="B">chemickú</option>
+    <option id="C">tepelnú</option>
+    <option id="D">mechanickú</option>
+    <option id="E">endergonickú</option>
+    <option id="F">exergonickú</option>
+    <option id="G">organickú</option>
+    <option id="H">tandemovú</option>
+    <answer>B</answer>
   </question>
 
   <question id="4">
-    <text>Ktorý fyzikálny zákon opisuje vzťah medzi tlakom a objemom plynu pri konštantnej teplote?</text>
-    <option id="A">Boyleov zákon</option>
-    <option id="B">Newtonov zákon</option>
-    <option id="C">Ohmov zákon</option>
-    <option id="D">Avogadrův zákon</option>
-    <answer>A</answer>
+    <text>K fázam mitózy nepatrí:</text>
+    <option id="A">S fáza</option>
+    <option id="B">anafáza</option>
+    <option id="C">G1 fáza</option>
+    <option id="D">metafáza</option>
+    <option id="E">G2 fáza</option>
+    <option id="F">profáza</option>
+    <option id="G">centrofáza</option>
+    <option id="H">telofáza</option>
+    <answer>A,C,E,G</answer>
   </question>
 
   <question id="5">
-    <text>Aká je hodnota elementárneho elektrického náboja?</text>
-    <option id="A">1,6 × 10⁻¹⁹ C</option>
-    <option id="B">3,0 × 10⁸ m/s</option>
-    <option id="C">6,02 × 10²³ mol⁻¹</option>
-    <option id="D">9,81 m/s²</option>
+    <text>Gaméty:</text>
+    <option id="A">sú vždy haploidné</option>
+    <option id="B">môžu byť rozlíšené (anizogaméty)</option>
+    <option id="C">môžu byť samčie</option>
+    <option id="D">sú vždy triploidné</option>
+    <option id="E">môžu byť nerozlíšené - rovnaké (izogaméty)</option>
+    <option id="F">sú vajíčka a spermie</option>
+    <option id="G">môžu byť samičie</option>
+    <option id="H">sú vždy diploidné</option>
+    <answer>A,B,C,E,F,G</answer>
+  </question>
+
+  <question id="6">
+    <text>Vývoj jedinca z neoplodneného vajíčka sa volá:</text>
+    <option id="A">partenogenézia</option>
+    <option id="B">vonkajšie oplodnenie</option>
+    <option id="C">partenogenéza</option>
+    <option id="D">partenéza</option>
+    <option id="E">izogamia</option>
+    <option id="F">anizogamia</option>
+    <option id="G">neúplná fertilizácia</option>
+    <option id="H">kopulácia</option>
+    <answer>C</answer>
+  </question>
+
+  <question id="7">
+    <text>Čo platí pre spermatogenézu a oogenézu?</text>
+    <option id="A">výsledkom spermatogenézy sú 4 haploidné spermie</option>
+    <option id="B">spermatogenéza je rovnocenné delenie</option>
+    <option id="C">oogenéza je rovnocenné delenie</option>
+    <option id="D">výsledkom oogenézy sú 4 haploidné vajíčka</option>
+    <option id="E">oogenéza nie je rovnocenné delenie</option>
+    <option id="F">ženy sa rodia s konštantným počtom primárnych oocytov</option>
+    <option id="G">muži sa rodia s konštantným počtom primárnych spermatocytov</option>
+    <option id="H">spermie a vajíčka sú haploidné</option>
+    <answer>A,B,E,F,H</answer>
+  </question>
+
+
+  <question id="8">
+    <text>Gény pre RNA kódujú poradie:</text>
+    <option id="A">nukleotidov v proteíne</option>
+    <option id="B">nukleotidov v molekulách tRNA</option>
+    <option id="C">nukleotidov v molekulách mRNA</option>
+    <option id="D">aminokyselín v polypeptidovom reťazci</option>
+    <option id="E">nukleotidov v molekulách ribonukleovej RNA</option>
+    <option id="F">nukleotidov v molekulách rRNA</option>
+    <option id="G">nukleotidov v informačnej RNA</option>
+    <option id="H">nukleotidov v messengerovej RNA</option>
+  <answer>B,E,F</answer>
+  </question>
+
+
+  <question id="9">
+    <text>Špecifické trojice za sebou nasledujúcich nukleotidov v makromolekule DNA sa nazývajú:</text>
+    <option id="A">trinómy nukleotidov</option>
+    <option id="B">trikódy nukleotidov</option>
+    <option id="C">trizómy nukleotidov</option>
+    <option id="D">triplety nukleotidov</option>
+    <option id="E">kodóny</option>
+    <option id="F">antikodóny</option>
+    <option id="G">transpozóny</option>
+    <option id="H">genómy</option>
+    <answer>D,E</answer>
+  </question>
+
+  <question id="10">
+    <text>Každý nukleotid pozostáva z:</text>
+    <option id="A">purínu, pentózy a kyseliny fosforečnej</option>
+    <option id="B">purínu/pyrimidínu, päťuhlíkatého cukru a zvyšku kyseliny fosforečnej</option>
+    <option id="C">purínu/pyrimidínu, päťuhlíkatého alebo šesťuhlíkatého cukru a zvyšku kyseliny fosforečnej</option>
+    <option id="D">bázy, cukru a fosfátu</option>
+    <option id="E">dusíkatej organickej bázy, ribózy alebo pentózy a kyseliny fosforečnej</option>
+    <option id="F">pentózy, fosfátu a cukru</option>
+    <option id="G">dusíkatej anorganickej bázy, pentózy a kyseliny fosforečnej</option>
+    <option id="H">fosfátu, ribózy alebo hexózy a dusíkatej bázy</option>
+    <answer>B,D</answer>
+  </question>
+
+  <question id="11">
+    <text>Kto v roku 1953 popísal model štruktúry DNA?</text>
+    <option id="A">J.F.Miescher</option>
+    <option id="B">J.E.Purkyne</option>
+    <option id="C">J.G.Mendel</option>
+    <option id="D">J.Watson a F.Crick</option>
+    <option id="E">W.Harvey</option>
+    <option id="F">N.Tesla</option>
+    <option id="G">M.C.Sklodowska</option>
+    <option id="H">Aristoteles</option>
+    <answer>D</answer>
+  </question>
+
+  <question id="12">
+    <text>Dusíkové bázy sú v DNA komplementárne v pároch:</text>
+    <option id="A">adenín s cytozínom</option>
+    <option id="B">tymín s guanínom</option>
+    <option id="C">guanín s cytozínom</option>
+    <option id="D">uracil s tymínom</option>
+    <option id="E">adenín s uracilom</option>
+    <option id="F">tymín s adenínom</option>
+    <option id="G">cytozín s guanínom</option>
+    <option id="H">adenín s tymínom</option>
+    <answer>C,F,G,H</answer>
+  </question>
+
+  <question id="13">
+    <text>Miera proteosyntézy je v bunke regulovaná:</text>
+    <option id="A">riadením syntézy DNA</option>
+    <option id="B">riadením syntézy mRNA</option>
+    <option id="C">množstvom ribozómov</option>
+    <option id="D">tvorbou aminokyselín</option>
+    <option id="E">prítomnosťou chlorofylu</option>
+    <option id="F">tvorbou sacharidov</option>
+    <option id="G">riadením tvorby polypeptidových reťazcov na ribozómoch</option>
+    <option id="H">riadením tvorby polynukleotidových reťazcov na ribozómoch</option>
+    <answer>B,C,G</answer>
+  </question>
+
+  <question id="14">
+    <text>Akú krvnú skupinu môže mať dieťa, keď matka má krvnú skupinu 0 a otec A?</text>
+    <option id="A">A s genotypom AA, ak je otec homozygot</option>
+    <option id="B">0 s genotypom 00, ak je otec homozygot</option>
+    <option id="C">A s genotypom A0, ak je otec homozygot</option>
+    <option id="D">B s genotypom B0, ak je otec heterozygot</option>
+    <option id="E">A s genotypom AA ak je otec heterozygot</option>
+    <option id="F">0 s genotypom 00, ak je otec heterozygot</option>
+    <option id="G">A alebo 0, ak je otec heterozygot</option>
+    <option id="H">A alebo 0, ak je otec homozygot</option>
+    <answer>C,F,G</answer>
+  </question>
+
+  <question id="15">
+    <text>Koľko % obyvateľov má na Slovensku krvnú skupinu B?</text>
+    <option id="A">31,5%</option>
+    <option id="B">21,5%</option>
+    <option id="C">41,5%</option>
+    <option id="D">37,8%</option>
+    <option id="E">18%</option>
+    <option id="F">6,6%</option>
+    <option id="G">85%</option>
+    <option id="H">15%</option>
+    <answer>E</answer>
+  </question>
+
+  <question id="16">
+    <text>Čiernobiele videnie za šera umožňujú:</text>
+    <option id="A">tyčinky</option>
+    <option id="B">Purkyněho bunky</option>
+    <option id="C">čapíky</option>
+    <option id="D">neurity tyčiniek</option>
+    <option id="E">dendrity tyčiniek</option>
+    <option id="F">bunky žltej škvrny</option>
+    <option id="G">dendrity čapíkov</option>
+    <option id="H">bunky slepej škvrny</option>
     <answer>A</answer>
+  </question>
+
+  <question id="17">
+    <text>Spoločnou vlastnosťou receptorových buniek je:</text>
+    <option id="A">reflex</option>
+    <option id="B">schopnosť vyvolať nervový vzruch</option>
+    <option id="C">reflexný oblúk</option>
+    <option id="D">adaptácia</option>
+    <option id="E">senzibilita</option>
+    <option id="F">drásavosť</option>
+    <option id="G">dráždivosť</option>
+    <option id="H">externý zdroj podnetu</option>
+    <answer>B,D,G</answer>
+  </question>
+
+  <question id="18">
+    <text>Čo predstavuje živú hmotu ekosystému?</text>
+    <option id="A">producenty, konzumenty a dekompozítory</option>
+    <option id="B">biom</option>
+    <option id="C">producenty, konzumenty a mikroelementy</option>
+    <option id="D">autotrofné a heterotrofné organizmy</option>
+    <option id="E">biomasa</option>
+    <option id="F">klimax</option>
+    <option id="G">sukcesia</option>
+    <option id="H">erózia</option>
+    <answer>A,D,E</answer>
+  </question>
+
+  <question id="19">
+    <text>Žlč u človeka:</text>
+    <option id="A">tvorí sa v bunkách tenkého čreva</option>
+    <option id="B">obsahuje žlčové kyseliny</option>
+    <option id="C">tvorí sa v bunkách podžalúdkovej žľazy</option>
+    <option id="D">tvorí sa v bunkách dvanástnika</option>
+    <option id="E">tvorí sa v bunkách pečene</option>
+    <option id="F">zhromažďuje a zahusťuje sa v žalúdku</option>
+    <option id="G">zhromažďuje a zahusťuje sa v žlčníku</option>
+    <option id="H">uľahčuje pôsobenie enzýmov, ktoré rozkladajú tuky</option>
+    <answer>B,E,G,H</answer>
+  </question>
+
+  <question id="20">
+    <text>Spoločensky závažné škodlivé javy sú:</text>
+    <option id="A">dlhodobé užívanie potrebných liekov</option>
+    <option id="B">toxikománia</option>
+    <option id="C">nikotinizmus</option>
+    <option id="D">alkoholizmus</option>
+    <option id="E">ľaváctvo</option>
+    <option id="F">praváctvo</option>
+    <option id="G">úrazy a otravy</option>
+    <option id="H">kofeinizmus</option>
+    <answer>B,C,D,G,H</answer>
   </question>
 </quiz>

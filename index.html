@@ -47,7 +47,7 @@
                 questionNodes.forEach((qNode, index) => {
                     const text = qNode.querySelector('text').textContent;
                     const options = qNode.querySelectorAll('option');
-                    const answer = qNode.querySelector('answer').textContent;
+                    const answer = qNode.querySelector('answer').textContent.split(',').map(x => x.trim());
 
                     const q = {
                         id: index,
@@ -71,20 +71,19 @@
 
             questions.forEach((q, index) => {
                 const card = document.createElement('ion-card');
+                card.id = `qcard${index}`; // pridáme ID pre farbenie
                 card.innerHTML = `
           <ion-card-header>
             <ion-card-title>Otázka ${index + 1}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
             <p>${q.text}</p>
-            <ion-radio-group id="q${index}">
-              ${q.options.map(opt => `
-                <ion-item>
-                  <ion-label>${opt.id}) ${opt.text}</ion-label>
-                  <ion-radio slot="start" value="${opt.id}"></ion-radio>
-                </ion-item>
-              `).join('')}
-            </ion-radio-group>
+            ${q.options.map(opt => `
+              <ion-item>
+                <ion-checkbox slot="start" value="${opt.id}" name="q${index}"></ion-checkbox>
+                <ion-label>${opt.id}) ${opt.text}</ion-label>
+              </ion-item>
+            `).join('')}
           </ion-card-content>
         `;
                 container.appendChild(card);
@@ -92,18 +91,59 @@
         }
 
         function submitAnswers() {
-            let score = 0;
+            let totalScore = 0; // súčet bodov
+            const maxScore = questions.length; // maximálny počet bodov (každá otázka má 1 bod)
+
             questions.forEach((q, index) => {
-                const group = document.getElementById(`q${index}`);
-                const selected = group.querySelector('ion-radio[checked]')?.value || group.querySelector('ion-radio[aria-checked="true"]')?.value;
-                if (selected === q.correct) {
-                    score++;
+                const checkboxes = document.querySelectorAll(`ion-checkbox[name="q${index}"]`);
+                const selected = Array.from(checkboxes)
+                    .filter(cb => cb.checked || cb.getAttribute('aria-checked') === 'true')
+                    .map(cb => cb.value);
+
+                const selectedSet = new Set(selected);
+                const correctSet = new Set(q.correct);
+
+                const card = document.querySelector(`#qcard${index}`);
+                const cardContent = card.querySelector('ion-card-content');
+
+                let correctSelected = selected.filter(x => correctSet.has(x)).length; // počet správnych zaškrtnutých
+                let wrongSelected = selected.filter(x => !correctSet.has(x)).length; // počet zle zaškrtnutých
+                const totalCorrect = correctSet.size; // počet všetkých správnych odpovedí
+
+                let score = Math.max(0, (correctSelected - wrongSelected) / totalCorrect); // vypočíta bod za otázku
+                if (score >= 1) {
+                    score = 1; // ak všetko správne a nič navyše
+                    card.style.backgroundColor = '#d4edda'; // zelená
+                    cardContent.innerHTML += `<ion-text color="success"><p><b>✔️ Správne!</b> (${q.correct.join(', ')})</p></ion-text>`;
+                } else if (score > 0) {
+                    card.style.backgroundColor = '#ffeeba'; // oranžová
+                    cardContent.innerHTML += `<ion-text color="warning"><p><b>⚠️ Čiastočne správne!</b> (${q.correct.join(', ')})</p></ion-text>`;
+                } else {
+                    card.style.backgroundColor = '#f8d7da'; // červená
+                    cardContent.innerHTML += `<ion-text color="danger"><p><b>❌ Nesprávne!</b> Správne odpovede: ${q.correct.join(', ')}</p></ion-text>`;
                 }
+
+                totalScore += score;
             });
+
+            const percent = ((totalScore / maxScore) * 100).toFixed(2);
             const resultCard = document.getElementById('result-card');
             const resultContent = document.getElementById('result-content');
-            resultContent.innerHTML = `Správne odpovede: ${score} z ${questions.length}`;
+
+            resultContent.innerHTML = `
+    <h2>Výsledok: ${percent}% (${totalScore.toFixed(2)} bodov z ${maxScore})</h2>
+  `;
             resultCard.style.display = 'block';
+        }
+
+
+
+        function setsAreEqual(a, b) {
+            if (a.size !== b.size) return false;
+            for (const item of a) {
+                if (!b.has(item)) return false;
+            }
+            return true;
         }
     </script>
 </body>
