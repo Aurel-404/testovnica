@@ -1,0 +1,46 @@
+<quiz>
+  <question id="1">
+    <text>Ako sa nazýva proces bunkového delenia, pri ktorom vznikajú dve geneticky identické bunky?</text>
+    <option id="A">Mitóza</option>
+    <option id="B">Meióza</option>
+    <option id="C">Oogenéza</option>
+    <option id="D">Spermatogenéza</option>
+    <answer>A</answer>
+  </question>
+
+  <question id="2">
+    <text>Aký je chemický vzorec kyseliny sírovej?</text>
+    <option id="A">H₂SO₄</option>
+    <option id="B">HNO₃</option>
+    <option id="C">H₂CO₃</option>
+    <option id="D">HCl</option>
+    <answer>A</answer>
+  </question>
+
+  <question id="3">
+    <text>Čo je základnou funkčnou jednotkou obličiek?</text>
+    <option id="A">Alveola</option>
+    <option id="B">Neuron</option>
+    <option id="C">Neurón</option>
+    <option id="D">Nefrón</option>
+    <answer>D</answer>
+  </question>
+
+  <question id="4">
+    <text>Ktorý fyzikálny zákon opisuje vzťah medzi tlakom a objemom plynu pri konštantnej teplote?</text>
+    <option id="A">Boyleov zákon</option>
+    <option id="B">Newtonov zákon</option>
+    <option id="C">Ohmov zákon</option>
+    <option id="D">Avogadrův zákon</option>
+    <answer>A</answer>
+  </question>
+
+  <question id="5">
+    <text>Aká je hodnota elementárneho elektrického náboja?</text>
+    <option id="A">1,6 × 10⁻¹⁹ C</option>
+    <option id="B">3,0 × 10⁸ m/s</option>
+    <option id="C">6,02 × 10²³ mol⁻¹</option>
+    <option id="D">9,81 m/s²</option>
+    <answer>A</answer>
+  </question>
+</quiz>
