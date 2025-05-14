@@ -8,6 +8,45 @@
     <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
     <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" rel="stylesheet">
+    <style>
+        body.dark {
+            --ion-background-color: #1a1a1a;
+            --ion-text-color: #e0e0e0;
+            --ion-card-background: #2a2a2a;
+            --ion-toolbar-background: #2a2a2a;
+            --ion-item-background: #2a2a2a;
+            --ion-color-primary: #4dabf7;
+            --ion-color-success: #66bb6a;
+            --ion-color-warning: #ffca28;
+            --ion-color-danger: #ef5350;
+        }
+
+        body.dark ion-card {
+            background-color: var(--ion-card-background);
+        }
+
+        body.dark ion-label,
+        body.dark ion-card-title,
+        body.dark ion-text,
+        body.dark p {
+            color: var(--ion-text-color);
+        }
+
+        .correct {
+            background-color: #2e7d32 !important;
+            color: #ffffff !important;
+        }
+
+        .partial {
+            background-color: #f9a825 !important;
+            color: #000000 !important;
+        }
+
+        .wrong {
+            background-color: #c62828 !important;
+            color: #ffffff !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -15,55 +54,80 @@
         <ion-header>
             <ion-toolbar>
                 <ion-title>Testové otázky</ion-title>
+                <ion-buttons slot="end">
+                    <ion-button onclick="toggleTheme()" id="themeToggle">
+                        🌙
+                    </ion-button>
+                </ion-buttons>
             </ion-toolbar>
         </ion-header>
 
         <ion-content class="ion-padding">
-            <div id="quiz-container"></div>
 
-            <ion-button expand="block" onclick="submitAnswers()">Odoslať odpovede</ion-button>
+            <div id="start-screen">
+                <ion-card>
+                    <ion-card-header>
+                        <ion-card-title>Vitaj v teste!</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <p>Po kliknutí na tlačidlo sa spustí test s otázkami.</p>
+                        <ion-button expand="block" onclick="startQuiz()">Spustiť test</ion-button>
+                        <ion-button expand="block" onclick="startQuizFromWrong()">Opakovať chybné otázky</ion-button>
+                        <ion-button expand="block" color="danger" onclick="clearWrongQuestions()">Vymazať uložené
+                            chyby</ion-button>
+                    </ion-card-content>
+                </ion-card>
+            </div>
 
-            <ion-card id="result-card" style="display:none; margin-top:20px;">
-                <ion-card-header>
-                    <ion-card-title>Výsledok</ion-card-title>
-                </ion-card-header>
-                <ion-card-content id="result-content">
-                </ion-card-content>
-            </ion-card>
+            <div id="quiz-screen" style="display:none;">
+                <div id="quiz-container"></div>
+                <ion-button expand="block" onclick="submitAnswers()">Odoslať odpovede</ion-button>
+                <ion-button expand="block" color="medium" onclick="goToStart()">Späť na úvod</ion-button>
+                <ion-card id="result-card" style="display:none; margin-top:20px;">
+                    <ion-card-header>
+                        <ion-card-title>Výsledok</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content id="result-content"></ion-card-content>
+                </ion-card>
+            </div>
+
         </ion-content>
     </ion-app>
 
     <script>
         let questions = [];
 
-        fetch('questions.xml')
-            .then(response => response.text())
-            .then(data => {
-                const parser = new DOMParser();
-                const xml = parser.parseFromString(data, "application/xml");
-                const questionNodes = xml.querySelectorAll('question');
-                questions = [];
+        function fetchQuestions() {
+            fetch('questions.xml')
+                .then(response => response.text())
+                .then(data => {
+                    const parser = new DOMParser();
+                    const xml = parser.parseFromString(data, "application/xml");
+                    const questionNodes = xml.querySelectorAll('question');
+                    questions = [];
 
-                questionNodes.forEach((qNode, index) => {
-                    const text = qNode.querySelector('text').textContent;
-                    const options = qNode.querySelectorAll('option');
-                    const answer = qNode.querySelector('answer').textContent.split(',').map(x => x.trim());
+                    questionNodes.forEach((qNode, index) => {
+                        const text = qNode.querySelector('text').textContent;
+                        const options = qNode.querySelectorAll('option');
+                        const answer = qNode.querySelector('answer').textContent.split(',').map(x => x.trim());
 
-                    const q = {
-                        id: index,
-                        text: text,
-                        options: Array.from(options).map(opt => ({
-                            id: opt.getAttribute('id'),
-                            text: opt.textContent
-                        })),
-                        correct: answer
-                    };
+                        const q = {
+                            id: index,
+                            text: text,
+                            options: Array.from(options).map(opt => ({
+                                id: opt.getAttribute('id'),
+                                text: opt.textContent
+                            })),
+                            correct: answer
+                        };
 
-                    questions.push(q);
+                        questions.push(q);
+                    });
+
+                    displayQuestions();
                 });
+        }
 
-                displayQuestions();
-            });
 
         function displayQuestions() {
             const container = document.getElementById('quiz-container');
@@ -71,7 +135,7 @@
 
             questions.forEach((q, index) => {
                 const card = document.createElement('ion-card');
-                card.id = `qcard${index}`; // pridáme ID pre farbenie
+                card.id = `qcard${index}`;
                 card.innerHTML = `
           <ion-card-header>
             <ion-card-title>Otázka ${index + 1}</ion-card-title>
@@ -90,9 +154,52 @@
             });
         }
 
+        function clearWrongQuestions() {
+            localStorage.removeItem('wrongQuestions');
+            alert("Uložené chybné otázky boli vymazané.");
+        }
+
+        function startQuiz() {
+            console.log("Test sa spúšťa...");
+            resetQuizState();
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('quiz-screen').style.display = 'block';
+            fetchQuestions();
+        }
+
+        function resetQuizState() {
+            document.getElementById('quiz-container').innerHTML = '';
+            document.getElementById('result-card').style.display = 'none';
+            document.getElementById('result-content').innerHTML = '';
+        }
+
+        function loadWrongQuestions() {
+            document.getElementById('wrongFileInput').click();
+        }
+
+        function startQuizFromWrong() {
+            const stored = localStorage.getItem('wrongQuestions');
+            if (!stored) {
+                alert("Žiadne uložené chybné otázky.");
+                return;
+            }
+
+            try {
+                questions = JSON.parse(stored);
+                resetQuizState();
+                document.getElementById('start-screen').style.display = 'none';
+                document.getElementById('quiz-screen').style.display = 'block';
+                displayQuestions();
+                localStorage.removeItem('wrongQuestions');
+            } catch (err) {
+                alert("Chyba pri načítaní uložených otázok.");
+            }
+        }
+
+
         function submitAnswers() {
-            let totalScore = 0; // súčet bodov
-            const maxScore = questions.length; // maximálny počet bodov (každá otázka má 1 bod)
+            let totalScore = 0;
+            const maxScore = questions.length;
 
             questions.forEach((q, index) => {
                 const checkboxes = document.querySelectorAll(`ion-checkbox[name="q${index}"]`);
@@ -106,20 +213,20 @@
                 const card = document.querySelector(`#qcard${index}`);
                 const cardContent = card.querySelector('ion-card-content');
 
-                let correctSelected = selected.filter(x => correctSet.has(x)).length; // počet správnych zaškrtnutých
-                let wrongSelected = selected.filter(x => !correctSet.has(x)).length; // počet zle zaškrtnutých
+                let correctSelected = selected.filter(x => correctSet.has(x)).length;
+                let wrongSelected = selected.filter(x => !correctSet.has(x)).length;
                 const totalCorrect = correctSet.size; // počet všetkých správnych odpovedí
 
-                let score = Math.max(0, (correctSelected - wrongSelected) / totalCorrect); // vypočíta bod za otázku
+                let score = Math.max(0, (correctSelected - wrongSelected) / totalCorrect); //vypočíta bodov za otázku
                 if (score >= 1) {
-                    score = 1; // ak všetko správne a nič navyše
-                    card.style.backgroundColor = '#d4edda'; // zelená
+                    score = 1;
+                    card.classList.add('correct');
                     cardContent.innerHTML += `<ion-text color="success"><p><b>✔️ Správne!</b> (${q.correct.join(', ')})</p></ion-text>`;
                 } else if (score > 0) {
-                    card.style.backgroundColor = '#ffeeba'; // oranžová
+                    card.classList.add('partial');
                     cardContent.innerHTML += `<ion-text color="warning"><p><b>⚠️ Čiastočne správne!</b> (${q.correct.join(', ')})</p></ion-text>`;
                 } else {
-                    card.style.backgroundColor = '#f8d7da'; // červená
+                    card.classList.add('wrong');
                     cardContent.innerHTML += `<ion-text color="danger"><p><b>❌ Nesprávne!</b> Správne odpovede: ${q.correct.join(', ')}</p></ion-text>`;
                 }
 
@@ -130,13 +237,28 @@
             const resultCard = document.getElementById('result-card');
             const resultContent = document.getElementById('result-content');
 
-            resultContent.innerHTML = `
-    <h2>Výsledok: ${percent}% (${totalScore.toFixed(2)} bodov z ${maxScore})</h2>
-  `;
+            resultContent.innerHTML = `<h2>Výsledok: ${percent}% (${totalScore.toFixed(2)} bodov z ${maxScore})</h2>`;
             resultCard.style.display = 'block';
+
+            const wrongOrPartial = questions.filter((q, index) => {
+                const checkboxes = document.querySelectorAll(`ion-checkbox[name="q${index}"]`);
+                const selected = Array.from(checkboxes)
+                    .filter(cb => cb.checked || cb.getAttribute('aria-checked') === 'true')
+                    .map(cb => cb.value);
+
+                const correctSet = new Set(q.correct);
+                const selectedSet = new Set(selected);
+
+                const correctSelected = selected.filter(x => correctSet.has(x)).length;
+                const wrongSelected = selected.filter(x => !correctSet.has(x)).length;
+                const totalCorrect = correctSet.size;
+
+                let score = Math.max(0, (correctSelected - wrongSelected) / totalCorrect);
+                return score < 1;
+            });
+            localStorage.setItem('wrongQuestions', JSON.stringify(wrongOrPartial)); //local storage ukladanie
+            console.log("Chybné otázky uložené do localStorage.");
         }
-
-
 
         function setsAreEqual(a, b) {
             if (a.size !== b.size) return false;
@@ -145,6 +267,37 @@
             }
             return true;
         }
+
+        function enableDarkTheme() {
+            document.body.classList.add('dark');
+        }
+
+        function disableDarkTheme() {
+            document.body.classList.remove('dark');
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const btn = document.getElementById('themeToggle');
+            btn.innerText = document.body.classList.contains('dark') ? '☀️' : '🌙';
+        }
+
+        function goToStart() {
+            document.getElementById('quiz-screen').style.display = 'none';
+            document.getElementById('start-screen').style.display = 'block';
+            document.getElementById('result-card').style.display = 'none';
+            document.getElementById('result-content').innerHTML = '';
+            document.getElementById('quiz-container').innerHTML = '';
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log("DOM načítaný. Čakám na štart...");
+            document.getElementById('quiz-screen').style.display = 'none';
+            document.getElementById('start-screen').style.display = 'block';
+            document.getElementById('quiz-container').innerHTML = '';
+        });
+
+
     </script>
 </body>
 
